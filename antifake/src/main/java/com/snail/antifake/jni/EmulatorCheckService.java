@@ -4,9 +4,11 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Process;
 import android.os.RemoteException;
-import android.support.annotation.Nullable;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import com.snail.antifake.IEmulatorCheck;
 
@@ -44,8 +46,8 @@ public class EmulatorCheckService extends Service {
     }
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-        Log.v("lishang","onCreate");
+    public void onDestroy() {
+        super.onDestroy();
+        Process.killProcess(Process.myPid());
     }
 }

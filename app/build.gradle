@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+
+    compileSdkVersion 31
 
     defaultConfig {
         applicationId "com.snail.device"
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 31
     }
 
     buildTypes {
@@ -26,22 +26,28 @@ android {
         }
     }
 
+    splits {
+        abi {
+            enable true
+            reset()
+            include  'armeabi-v7a', 'arm64-v8a',"x86","x86_64"   //select ABIs to build APKs for
+            universalApk true //generate an additional APK that contains all the ABIs
+        }
+    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 
-//    splits {
-//        abi {
-//            enable true
-//            reset()
-//            include  'armeabi-v7a', 'arm64-v8a',"x86","x86_64"   //select ABIs to build APKs for
-//            universalApk true //generate an additional APK that contains all the ABIs
-//        }
-//    }
-
+    viewBinding {
+        enabled = true
+    }
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-//    implementation project (':antifake')
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation project (':antifake')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'io.github.happylishang:antifake:1.5.0'
+//    implementation 'io.github.happylishang:antifake:1.7.1'
 
 }
